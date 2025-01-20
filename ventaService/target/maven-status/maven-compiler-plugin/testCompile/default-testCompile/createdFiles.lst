@@ -1,0 +1,3 @@
+com\example\ventaService\VentaServiceTests.class
+com\example\ventaService\FeignClientTests.class
+com\example\ventaService\VentaControllerTests.class

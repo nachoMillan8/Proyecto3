@@ -1,0 +1,65 @@
+version: '3.9'
+services:
+  config-server:
+    image: config-server:1.0
+    networks:
+      - proyect3-red
+    container_name: config-server-container
+    ports:
+      - "8081:8081"
+
+  eureka-server:
+    image: eureka-server:1.0
+    networks:
+      - proyect3-red
+    container_name: eureka-server-container
+    ports:
+      - "8089:8089"
+    depends_on:
+      - config-server
+
+  evento-service:
+    image: evento-service:1.0
+    networks:
+      - proyect3-red
+    container_name: evento-service-container
+    ports:
+      - "8888:8888"
+    depends_on:
+      - eureka-server
+
+  usuario-service:
+    image: usuario-service:1.0
+    networks:
+      - proyect3-red
+    container_name: usuario-service-container
+    ports:
+      - "7777:7777"
+    depends_on:
+      - eureka-server
+
+  venta-service:
+    image: venta-service:1.0
+    networks:
+      - proyect3-red
+    container_name: venta-service-container
+    ports:
+      - "9999:9999"
+    depends_on:
+      - eureka-server
+      - evento-service
+      - usuario-service
+
+  gateway-service:
+    image: gateway-service:1.0
+    networks:
+      - proyect3-red
+    container_name: gateway-service-container
+    ports:
+      - "8080:8080"
+    depends_on:
+      - eureka-server
+
+networks:
+  proyect3-red:
+    driver: bridge

@@ -1,0 +1,12 @@
+## Configuración del servidor Eureka: nombre,
+## ubicación del servidor de configuración, credenciales
+## de autenticación y habilitación del Config Server
+spring:
+  application:
+    name: eurekaService
+  cloud:
+    config:
+      uri: http://localhost:8081
+      password: 1234
+      username: root
+      enabled: true
